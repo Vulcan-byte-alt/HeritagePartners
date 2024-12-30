@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="android-chrome-512x512.png" type="image/x-icon">
+    <title>Heritage Partners</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .custom-gradient {
+            background: linear-gradient(135deg, #1f2937, #4b5563, #9ca3af);
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .slide-up {
+            transform: translateY(-100%);
+            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .logo-container {
+            position: relative;
+            width: 300px;
+            /* Increased Width */
+            height: 300px;
+            /* Increased Height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .legacy-pillar {
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .legacy-pillar-left {
+            transform: rotate(-5deg);
+        }
+
+        .logo-container:hover .legacy-pillar-right {
+            transform: rotate(5deg);
+        }
+
+        .connector {
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover .connector {
+            transform: scaleX(1.1);
+        }
+
+        .logo-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+
+<body class="overflow-hidden">
+    <!-- Loading Screen -->
+    <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center custom-gradient">
+        <div class="text-center">
+            <div class="text-white text-3xl md:text-4xl tracking-[0.4em] font-light mb-2 opacity-0" id="loaderTextTop">
+                HERITAGE</div>
+            <div class="text-white text-3xl md:text-4xl tracking-[0.4em] font-light opacity-0" id="loaderTextBottom">
+                PARTNERS</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="relative min-h-screen">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-30 top-0 opacity-0 pt-8" id="navBar">
+            <div class="text-center text-gray-600 text-sm tracking-[0.5em]">
+                HERITAGE PARTNERS
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="relative z-20 flex flex-col items-center justify-center min-h-screen px-4">
+            <!-- Meaningful Logo: Two pillars representing partnership and heritage -->
+            <!-- Logo Container -->
+            <div class="opacity-0" id="logoSpace">
+                <div class="logo-container floating">
+                    <img src="heritage.png" alt="Heritage Partners Logo" class="logo-image">
+                </div>
+            </div>
+
+            <!-- Content -->
+            <h1 class="text-center text-3xl md:text-4xl font-normal tracking-[0.4em] opacity-0 transform translate-y-4 mb-6 text-gray-700"
+                id="title">
+                HERITAGE PARTNERS GROUP
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-600 mb-12 font-light tracking-[0.1em] leading-relaxed opacity-0 transform translate-y-4 max-w-2xl text-center"
+                id="mainText">
+                Preserving heritage, empowering brand growth.
+            </p>
+
+
+            <!-- Contact -->
+            <div class="opacity-0 text-center" id="contact">
+                <a href="mailto:info@example.com"
+                    class="text-gray-700 hover:text-gray-900 transition-colors tracking-[0.1em] text-lg">
+                    info@example.com
+                </a>
+                <p class="mt-2 text-gray-500 text-sm tracking-[0.1em]">
+                    123 Main Street, Anytown, USA
+                </p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="fixed bottom-0 w-full z-30 p-8 opacity-0" id="footer">
+            <div class="max-w-7xl mx-auto flex justify-center items-center text-gray-500 text-sm tracking-[0.2em]">
+                © 2024 HERITAGE PARTNERS
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loaderTextTop = document.getElementById('loaderTextTop');
+                const loaderTextBottom = document.getElementById('loaderTextBottom');
+
+                [loaderTextTop, loaderTextBottom].forEach((el, i) => {
+                    el.style.transition = 'opacity 0.8s, transform 0.8s';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+
+                setTimeout(() => {
+                    const loader = document.getElementById('loader');
+                    loader.classList.add('slide-up');
+
+                    setTimeout(() => {
+                        const elements = [
+                            'logoSpace',
+                            'title',
+                            'mainText',
+                            'contact',
+                            'navBar',
+                            'footer'
+                        ];
+
+                        elements.forEach((id, index) => {
+                            const el = document.getElementById(id);
+                            setTimeout(() => {
+                                el.style.transition = 'opacity 1s, transform 1s';
+                                el.style.opacity = '1';
+                                el.style.transform = 'translateY(0)';
+                            }, index * 200);
+                        });
+                    }, 500);
+                }, 2000);
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>
